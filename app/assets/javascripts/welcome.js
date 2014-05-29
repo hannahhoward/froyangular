@@ -25,9 +25,13 @@ froyoApp.controller('YogurtCtrl', ['Yogurt', '$scope',
       $scope.yogurts = yogurts;
     });
 
-    $scope.details = function(yogurt) {
+    $scope.showDetails = function(yogurt) {
       yogurt.details = true;
       yogurt.editing = false;
+    };
+
+    $scope.hideDetails = function(yogurt) {
+      yogurt.details = false;
     };
 
     $scope.editing = function (yogurt) {
@@ -57,7 +61,7 @@ froyoApp.controller('YogurtCtrl', ['Yogurt', '$scope',
     }
     $scope.delete = function(yogurt) {
       yogurt.$delete(function() {
-        position = $scope.yogurts.indexOf(yogurt);
+        var position = $scope.yogurts.indexOf(yogurt);
         $scope.yogurts.splice(position, 1);
       });
     }

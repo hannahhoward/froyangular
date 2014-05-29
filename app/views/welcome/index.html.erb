@@ -1,9 +1,12 @@
 <div ng-app="froyoapp">
   <div ng-controller="YogurtCtrl">
     <h3>Yogurts</h3>
+    <div id = "search">
+      Search: <input ng-model="search">
+    </div>
     <table class="table">
       <tbody>
-        <tr ng-repeat="yogurt in yogurts track by $index">
+        <tr ng-repeat="yogurt in yogurts | filter: search">
           <td>
             <span ng-hide="yogurt.editing">{{yogurt.quantity}} oz of {{yogurt.flavor}} yogurt with {{yogurt.topping}}</span>
             <div ng-show="yogurt.details">
@@ -33,9 +36,10 @@
               </form>
             </div>
           </td>
-          <td><span ng-click="details(yogurt)">Show Details</span></td>
-          <td><span ng-click="editing(yogurt)">Edit</span></td>
-          <td><span ng-click="delete(yogurt)">Delete</span></td>
+          <td><a ng-hide="yogurt.details" ng-click="showDetails(yogurt)">Show Details</a>
+          <a ng-show="yogurt.details" ng-click="hideDetails(yogurt)">Hide Details</a></td>
+          <td><a ng-click="editing(yogurt)">Edit</span></td>
+          <td><a ng-click="delete(yogurt)">Delete</span></td>
         </tr>
       </tbody>
     </table>
