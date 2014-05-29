@@ -1,0 +1,53 @@
+<div ng-app="froyoapp">
+  <div ng-controller="YogurtCtrl">
+    <h3>Yogurts</h3>
+    <table class="table">
+      <tbody>
+        <tr ng-repeat="yogurt in yogurts track by $index">
+          <td>
+            <span ng-hide="yogurt.editing">{{yogurt.quantity}} oz of {{yogurt.flavor}} yogurt with {{yogurt.topping}}</span>
+            <div ng-show="yogurt.details">
+              <dl>
+                <dt>Quantity</dt>
+                <dd>{{yogurt.quantity}} oz</dd>
+
+                <dt>Price</dt>
+                <dd>{{price(yogurt)}}</dd>
+
+                <dt>Flavor</dt>
+                <dd>{{yogurt.flavor}}</dd>
+
+                <dt>Topping</dt>
+                <dd>{{yogurt.topping}}</dd>
+              </dl>
+            </div>
+            <div ng-show="yogurt.editing">
+              <form ng-submit="update(yogurt)">
+                <label for="quantity">Quantity:</label>
+                <input name="quantity" ng-model="yogurt.quantity" required>
+                <label for="flavor">Flavor:</label>
+                <input name="flavor" ng-model="yogurt.flavor" required>
+                <label for="topping">Topping:</label>
+                <input name="topping" ng-model="yogurt.topping" required>
+                <input type="submit" value="Update!">
+              </form>
+            </div>
+          </td>
+          <td><span ng-click="details(yogurt)">Show Details</span></td>
+          <td><span ng-click="editing(yogurt)">Edit</span></td>
+          <td><span ng-click="delete(yogurt)">Delete</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <h4>New Yogurt:</h4>
+    <form ng-submit="create()">
+      <label for="quantity">Quantity:</label>
+      <input name="quantity" ng-model="newYogurt.quantity" required>
+      <label for="flavor">Flavor:</label>
+      <input name="flavor" ng-model="newYogurt.flavor" required>
+      <label for="topping">Topping:</label>
+      <input name="topping" ng-model="newYogurt.topping" required>
+      <input type="submit" value="Add New Yogurt!">
+    </form>
+  </div>
+</div>
